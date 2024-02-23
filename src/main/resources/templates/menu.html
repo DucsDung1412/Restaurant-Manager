@@ -1,0 +1,1480 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+   
+    <!-- Font-Awesome -->
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="../images/Icons/logo/app-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="../images/Icons/logo/appicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="../images/Icons/logo/appicon-16x16.png">
+    <link rel="manifest" href="../Json/manifest.json">
+    <link rel="mask-icon" href="../images/Icons/logo/safari-pinned-tab.svg"
+        color="#5bbad5">
+    <link rel="shortcut icon" href="../images/Icons/logo/appicon.ico">
+    <meta name="msapplication-config"
+        content="https://yevgenysim-turkey.github.io/touche/assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Libs CSS -->
+    <link rel="stylesheet" href="../CSS/main_libs.css" />
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="../CSS/main_theme.css" />
+
+    <!-- Libs CSS -->
+    <link rel="stylesheet" href="../CSS/cart_libs.css" />
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="https://yevgenysim-turkey.github.io/shopper/assets/css/theme.bundle.css" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Map -->
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' />
+
+    <style>
+        .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+            color: #f5a637;
+        }
+
+        footer p,
+        footer li,
+        footer .text-xs,
+        footer .font-serif {
+            color: #6c757d;
+        }
+
+        .text-primary,
+        .navbar-light .navbar-nav .nav-link:focus,
+        .navbar-light .navbar-nav .nav-link:hover,
+        footer a {
+            color: #f5a637 !important;
+        }
+
+        footer a {
+            text-decoration: underline;
+        }
+
+        .search-box {
+            width: 100%;
+            position: relative;
+            display: flex;
+        }
+
+        .search-input {
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            border: 4px solid #111d5e;
+            border-radius: 10px 0 0 10px;
+            border-right: none;
+            outline: none;
+            font-size: 18px;
+            color: #000;
+            background: none;
+        }
+
+        .search-button {
+            text-align: center;
+            height: 40px;
+            width: 40px;
+            outline: none;
+            cursor: pointer;
+            border: 4px solid #111d5e;
+            border-radius: 0 10px 10px 0;
+            border-left: none;
+            background: none;
+            font-size: 18px;
+            border-left: 4px solid #111d5e;
+        }
+
+        #filterNav .nav-item .nav-link{
+            font-weight: 800;
+        }
+
+        .swiper {
+            width: 100%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide:hover{
+            cursor: grab;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-img-hover .card-img-back {
+            opacity: 1;
+        }
+
+        .card-img, .card-img-bottom, .card-img-top {
+            width: 100%;
+            height: 312px;
+        }
+
+        .add-to-cart{
+            color: #000;
+        }
+
+        .btn-white-primary:hover .add-to-cart {
+            color: #fff;
+        }
+
+        .dropdown-toggle:after {
+            content: "" !important;
+            border: 0 !important;
+        }
+    </style>
+
+    <!-- Title -->
+    <title>Café &amp; Restaurant</title>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-dark navbar-expand-lg navbar-togglable fixed-top">
+        <div class="container">
+
+            <!-- Navbar brand (mobile) -->
+            <a class="navbar-brand d-lg-none" href="/index">Logo</a>
+
+            <!-- Navbar toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar collapse -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+
+                <!-- Navbar nav -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">About
+                            Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/menu">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Reservation</a>
+                    </li>
+                </ul>
+
+                <!-- Navbar brand -->
+                <a class="navbar-brand d-none d-lg-flex mx-lg-auto" href="/index">
+                    Logo
+                </a>
+
+                <!-- Navbar nav -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Contact</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
+                        <a class="nav-link" href="/showLogin">Login</a>
+                    </li>
+                    <li class="dropdown text-end nav-item" sec:authorize="isAuthenticated()">
+                        <a href="" class="nav-link d-flex d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                                 style="
+                                                    width: 14px;
+                                                    height: auto;
+                                                "><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                <path
+                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z">
+                                </path>
+                            </svg>
+                        </a>
+                        <!-- function -->
+                        <ul class="dropdown-menu text-small" data-popper-placement="bottom-start" style="padding: 4px 0; left: 16px; position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 34px);">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="profile-page.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="/dashboard" sec:authorize="hasRole('ROLE_ADMIN')">DashBoard</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" id="logout-link" href="#" th:href="@{/logout}">Sign out</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a href="#modalShoppingCart" class="nav-link d-flex" style="padding-left: 0;"
+                           data-bs-toggle="offcanvas">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                 style="
+                                                    width: 18px;
+                                                    height: auto;
+                                                "><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                <path
+                                        d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z">
+                                </path>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header data-jarallax data-speed=".8"
+        style="height: 64vh;background-image: url(https://yevgenysim-turkey.github.io/touche/assets/img/23.jpg);">
+        <div class="pt-10 pb-8 pt-md-15 pb-md-13 bg-black-50" style="height: 100%;">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6 text-center">
+
+                        <!-- Heading -->
+                        <h1 class="display-6 fw-bold text-white">
+                            Menu Options
+                        </h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <section class="py-11">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-3">
+
+                    <!-- Filters -->
+                    <form class="mb-10 mb-md-0 form-fixed">
+                        <ul class="nav nav-vertical" id="filterNav">
+                            <li class="nav-item">
+
+                                <!-- Toggle -->
+                                <a class="nav-link dropdown-toggle fs-lg text-reset border-bottom mb-6"
+                                    data-bs-toggle="collapse" href="#categoryCollapse">
+                                    Category
+                                </a>
+
+                                <!-- Collapse -->
+                                <div class="collapse" id="categoryCollapse">
+                                    <div class="form-group">
+                                        <ul class="list-styled mb-0" id="productsNav">
+                                            <li class="list-styled-item">
+                                                <a class="list-styled-link" href="#">
+                                                    All Products
+                                                </a>
+                                            </li>
+                                            <li class="list-styled-item">
+                                                <a class="list-styled-link" href="#">
+                                                    Starter
+                                                </a>
+                                            </li>
+                                            <li class="list-styled-item">
+                                                <a class="list-styled-link" href="#">
+                                                    Main course
+                                                </a>
+                                            </li>
+                                            <li class="list-styled-item">
+                                                <a class="list-styled-link" href="#">
+                                                    Mide dish
+                                                </a>
+                                            </li>
+                                            <li class="list-styled-item">
+                                                <a class="list-styled-link" href="#">
+                                                    Dessert
+                                                </a>
+                                            </li>
+                                            <li class="list-styled-item">
+                                                <a class="list-styled-link" href="#">
+                                                    Drinks and Beverages
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li class="nav-item">
+
+                                <!-- Toggle -->
+                                <a class="nav-link dropdown-toggle fs-lg text-reset border-bottom mb-6"
+                                    data-bs-toggle="collapse" href="#seasonCollapse">
+                                    Season
+                                </a>
+
+                                <!-- Collapse -->
+                                <div class="collapse" id="seasonCollapse" data-simplebar-collapse="#seasonGroup">
+                                    <div class="form-group form-group-overflow mb-6" id="seasonGroup">
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" id="seasonOne" type="checkbox" checked>
+                                            <label class="form-check-label" for="seasonOne">
+                                                Spring
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" id="seasonTwo" type="checkbox">
+                                            <label class="form-check-label" for="seasonTwo">
+                                                Summer
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" id="seasonThree" type="checkbox">
+                                            <label class="form-check-label" for="seasonThree">
+                                                Autumn
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="seasonFour" type="checkbox">
+                                            <label class="form-check-label" for="seasonFour">
+                                                Winter
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li class="nav-item">
+
+                                <!-- Toggle -->
+                                <a class="nav-link dropdown-toggle fs-lg text-reset border-bottom mb-6"
+                                    data-bs-toggle="collapse" href="#StarterCollapse">
+                                    Starter
+                                </a>
+
+                                <!-- Collapse -->
+                                <div class="collapse" id="StarterCollapse" data-simplebar-collapse="#StarterGroup">
+
+                                    <!-- Search -->
+                                    <div data-list='{"valueNames": ["name"]}'>
+
+                                        <!-- Input group -->
+                                        <div class="input-group input-group-merge mb-6">
+                                            <input class="form-control form-control-xs search" type="search"
+                                                placeholder="Search Starter">
+
+                                            <!-- Button -->
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-border btn-xs">
+                                                    <i class="fe fe-search"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Form group -->
+                                        <div class="form-group form-group-overflow mb-6" id="StarterGroup">
+                                            <div class="list">
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="StarterOne" type="checkbox">
+                                                    <label class="form-check-label name" for="StarterOne">
+                                                        Starter 1
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="StarterTwo" type="checkbox"
+                                                        disabled>
+                                                    <label class="form-check-label name" for="StarterTwo">
+                                                        Starter 2
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="StarterThree" type="checkbox">
+                                                    <label class="form-check-label name" for="StarterThree">
+                                                        Starter 3
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="StarterFour" type="checkbox"
+                                                        checked>
+                                                    <label class="form-check-label name" for="StarterFour">
+                                                        Starter 4
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="StarterFive" type="checkbox">
+                                                    <label class="form-check-label name" for="StarterFive">
+                                                        Starter 5
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="StarterSix" type="checkbox">
+                                                    <label class="form-check-label name" for="StarterSix">
+                                                        Starter 6
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="StarterSeven" type="checkbox">
+                                                    <label class="form-check-label name" for="StarterSeven">
+                                                        Starter 7
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="StarterEight" type="checkbox">
+                                                    <label class="form-check-label name" for="StarterEight">
+                                                        Starter 8
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" id="StarterNine" type="checkbox">
+                                                    <label class="form-check-label name" for="StarterNine">
+                                                        Starter 9
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <li class="nav-item">
+
+                                <!-- Toggle -->
+                                <a class="nav-link dropdown-toggle fs-lg text-reset border-bottom mb-6"
+                                    data-bs-toggle="collapse" href="#main-courseCollapse1">
+                                    Main course
+                                </a>
+
+                                <!-- Collapse -->
+                                <div class="collapse" id="main-courseCollapse1" data-simplebar-collapse="#main-courseGroup">
+
+                                    <!-- Search -->
+                                    <div data-list='{"valueNames": ["name"]}'>
+
+                                        <!-- Input group -->
+                                        <div class="input-group input-group-merge mb-6">
+                                            <input class="form-control form-control-xs search" type="search"
+                                                placeholder="Search Main course">
+
+                                            <!-- Button -->
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-border btn-xs">
+                                                    <i class="fe fe-search"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Form group -->
+                                        <div class="form-group form-group-overflow mb-6" id="main-courseGroup">
+                                            <div class="list">
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="main-courseOne" type="checkbox">
+                                                    <label class="form-check-label name" for="main-courseOne">
+                                                        Main course 1
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="main-courseTwo" type="checkbox"
+                                                        disabled>
+                                                    <label class="form-check-label name" for="main-courseTwo">
+                                                        Main course 2
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="main-courseThree" type="checkbox">
+                                                    <label class="form-check-label name" for="main-courseThree">
+                                                        Main course 3
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="main-courseFour" type="checkbox"
+                                                        checked>
+                                                    <label class="form-check-label name" for="main-courseFour">
+                                                        Main course 4
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="main-courseFive" type="checkbox">
+                                                    <label class="form-check-label name" for="main-courseFive">
+                                                        Main course 5
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="main-courseSix" type="checkbox">
+                                                    <label class="form-check-label name" for="main-courseSix">
+                                                        Main course 6
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="main-courseSeven" type="checkbox">
+                                                    <label class="form-check-label name" for="main-courseSeven">
+                                                        Main course 7
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="main-courseEight" type="checkbox">
+                                                    <label class="form-check-label name" for="main-courseEight">
+                                                        Main course 8
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" id="main-courseNine" type="checkbox">
+                                                    <label class="form-check-label name" for="main-courseNine">
+                                                        Main course 9
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <li class="nav-item">
+
+                                <!-- Toggle -->
+                                <a class="nav-link dropdown-toggle fs-lg text-reset border-bottom mb-6"
+                                    data-bs-toggle="collapse" href="#mide-dishCollapse1">
+                                    Mide dish
+                                </a>
+
+                                <!-- Collapse -->
+                                <div class="collapse" id="mide-dishCollapse1" data-simplebar-collapse="#mide-dishGroup">
+
+                                    <!-- Search -->
+                                    <div data-list='{"valueNames": ["name"]}'>
+
+                                        <!-- Input group -->
+                                        <div class="input-group input-group-merge mb-6">
+                                            <input class="form-control form-control-xs search" type="search"
+                                                placeholder="Search Mide dish">
+
+                                            <!-- Button -->
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-border btn-xs">
+                                                    <i class="fe fe-search"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Form group -->
+                                        <div class="form-group form-group-overflow mb-6" id="mide-dishGroup">
+                                            <div class="list">
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="mide-dishOne" type="checkbox">
+                                                    <label class="form-check-label name" for="mide-dishOne">
+                                                        Mide dish 1
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="mide-dishTwo" type="checkbox"
+                                                        disabled>
+                                                    <label class="form-check-label name" for="mide-dishTwo">
+                                                        Mide dish 2
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="mide-dishThree" type="checkbox">
+                                                    <label class="form-check-label name" for="mide-dishThree">
+                                                        Mide dish 3
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="mide-dishFour" type="checkbox"
+                                                        checked>
+                                                    <label class="form-check-label name" for="mide-dishFour">
+                                                        Mide dish 4
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="mide-dishFive" type="checkbox">
+                                                    <label class="form-check-label name" for="mide-dishFive">
+                                                        Mide dish 5
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="mide-dishSix" type="checkbox">
+                                                    <label class="form-check-label name" for="mide-dishSix">
+                                                        Mide dish 6
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="mide-dishSeven" type="checkbox">
+                                                    <label class="form-check-label name" for="mide-dishSeven">
+                                                        Mide dish 7
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="mide-dishEight" type="checkbox">
+                                                    <label class="form-check-label name" for="mide-dishEight">
+                                                        Mide dish 8
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" id="mide-dishNine" type="checkbox">
+                                                    <label class="form-check-label name" for="mide-dishNine">
+                                                        Mide dish 9
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <li class="nav-item">
+
+                                <!-- Toggle -->
+                                <a class="nav-link dropdown-toggle fs-lg text-reset border-bottom mb-6"
+                                    data-bs-toggle="collapse" href="#dessertCollapse1">
+                                    Dessert
+                                </a>
+
+                                <!-- Collapse -->
+                                <div class="collapse" id="dessertCollapse1" data-simplebar-collapse="#dessertGroup">
+
+                                    <!-- Search -->
+                                    <div data-list='{"valueNames": ["name"]}'>
+
+                                        <!-- Input group -->
+                                        <div class="input-group input-group-merge mb-6">
+                                            <input class="form-control form-control-xs search" type="search"
+                                                placeholder="Search Dessert">
+
+                                            <!-- Button -->
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-border btn-xs">
+                                                    <i class="fe fe-search"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Form group -->
+                                        <div class="form-group form-group-overflow mb-6" id="dessertGroup">
+                                            <div class="list">
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="dessertOne" type="checkbox">
+                                                    <label class="form-check-label name" for="dessertOne">
+                                                        Dessert 1
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="dessertTwo" type="checkbox"
+                                                        disabled>
+                                                    <label class="form-check-label name" for="dessertTwo">
+                                                        Dessert 2
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="dessertThree" type="checkbox">
+                                                    <label class="form-check-label name" for="dessertThree">
+                                                        Dessert 3
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="dessertFour" type="checkbox"
+                                                        checked>
+                                                    <label class="form-check-label name" for="dessertFour">
+                                                        Dessert 4
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="dessertFive" type="checkbox">
+                                                    <label class="form-check-label name" for="dessertFive">
+                                                        Dessert 5
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="dessertSix" type="checkbox">
+                                                    <label class="form-check-label name" for="dessertSix">
+                                                        Dessert 6
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="dessertSeven" type="checkbox">
+                                                    <label class="form-check-label name" for="dessertSeven">
+                                                        Dessert 7
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="dessertEight" type="checkbox">
+                                                    <label class="form-check-label name" for="dessertEight">
+                                                        Dessert 8
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" id="dessertNine" type="checkbox">
+                                                    <label class="form-check-label name" for="dessertNine">
+                                                        Dessert 9
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <li class="nav-item">
+
+                                <!-- Toggle -->
+                                <a class="nav-link dropdown-toggle fs-lg text-reset border-bottom mb-6"
+                                    data-bs-toggle="collapse" href="#drinks-beveragesCollapse1">
+                                    Drinks and Beverages
+                                </a>
+
+                                <!-- Collapse -->
+                                <div class="collapse" id="drinks-beveragesCollapse1" data-simplebar-collapse="#drinks-beveragesGroup">
+
+                                    <!-- Search -->
+                                    <div data-list='{"valueNames": ["name"]}'>
+
+                                        <!-- Input group -->
+                                        <div class="input-group input-group-merge mb-6">
+                                            <input class="form-control form-control-xs search" type="search"
+                                                placeholder="Search Drinks and Beverages">
+
+                                            <!-- Button -->
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-border btn-xs">
+                                                    <i class="fe fe-search"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Form group -->
+                                        <div class="form-group form-group-overflow mb-6" id="drinks-beveragesGroup">
+                                            <div class="list">
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="drinks-beveragesOne" type="checkbox">
+                                                    <label class="form-check-label name" for="drinks-beveragesOne">
+                                                        Drinks and Beverages 1
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="drinks-beveragesTwo" type="checkbox"
+                                                        disabled>
+                                                    <label class="form-check-label name" for="drinks-beveragesTwo">
+                                                        Drinks and Beverages 2
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="drinks-beveragesThree" type="checkbox">
+                                                    <label class="form-check-label name" for="drinks-beveragesThree">
+                                                        Drinks and Beverages 3
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="drinks-beveragesFour" type="checkbox"
+                                                        checked>
+                                                    <label class="form-check-label name" for="drinks-beveragesFour">
+                                                        Drinks and Beverages 4
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="drinks-beveragesFive" type="checkbox">
+                                                    <label class="form-check-label name" for="drinks-beveragesFive">
+                                                        Drinks and Beverages 5
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="drinks-beveragesSix" type="checkbox">
+                                                    <label class="form-check-label name" for="drinks-beveragesSix">
+                                                        Drinks and Beverages 6
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="drinks-beveragesSeven" type="checkbox">
+                                                    <label class="form-check-label name" for="drinks-beveragesSeven">
+                                                        Drinks and Beverages 7
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" id="drinks-beveragesEight" type="checkbox">
+                                                    <label class="form-check-label name" for="drinks-beveragesEight">
+                                                        Drinks and Beverages 8
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" id="drinks-beveragesNine" type="checkbox">
+                                                    <label class="form-check-label name" for="drinks-beveragesNine">
+                                                        Drinks and Beverages 9
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <li class="nav-item">
+
+                                <!-- Toggle -->
+                                <a class="nav-link dropdown-toggle fs-lg text-reset border-bottom mb-6"
+                                    data-bs-toggle="collapse" href="#priceCollapse">
+                                    Price
+                                </a>
+
+                                <!-- Collapse -->
+                                <div class="collapse" id="priceCollapse" data-simplebar-collapse="#priceGroup">
+
+                                    <!-- Form group-->
+                                    <div class="form-group form-group-overflow mb-6" id="priceGroup">
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" id="priceOne" type="checkbox" checked>
+                                            <label class="form-check-label" for="priceOne">
+                                                $10.00 - $49.00
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" id="priceTwo" type="checkbox" checked>
+                                            <label class="form-check-label" for="priceTwo">
+                                                $50.00 - $99.00
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" id="priceThree" type="checkbox">
+                                            <label class="form-check-label" for="priceThree">
+                                                $100.00 - $199.00
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="priceFour" type="checkbox">
+                                            <label class="form-check-label" for="priceFour">
+                                                $200.00 and Up
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Range -->
+                                    <div class="d-flex align-items-center">
+
+                                        <!-- Input -->
+                                        <input type="number" class="form-control form-control-xs" placeholder="$10.00"
+                                            min="10">
+
+                                        <!-- Divider -->
+                                        <div class="text-gray-350 mx-2">‒</div>
+
+                                        <!-- Input -->
+                                        <input type="number" class="form-control form-control-xs" placeholder="$350.00"
+                                            max="350">
+
+                                    </div>
+
+                                </div>
+
+                            </li>
+                        </ul>
+                    </form>
+
+                </div>
+                <div class="col-12 col-md-8 col-lg-9">
+                    
+                    <!-- Slider -->
+                    <div class="flickity-page-dots-inner mb-9 swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <!-- Item -->
+                                <div class="w-100">
+                                    <div class="card bg-h-100 bg-start"
+                                        style="background-image: url(https://yevgenysim-turkey.github.io/shopper/assets/img/covers/cover-24.jpg);">
+                                        <div class="row" style="min-height: 400px;">
+                                            <div class="col-12 col-md-10 col-lg-8 col-xl-6 align-self-center">
+                                                <div class="card-body px-md-10 py-11">
+        
+                                                    <!-- Heading -->
+                                                    <h4>
+                                                        Summer-inspired cuisine
+                                                    </h4>
+        
+                                                    <!-- Button -->
+                                                    <a class="btn btn-link px-0 text-body" href="shop.html">
+                                                        View More <i class="fe fe-arrow-right ms-2"></i>
+                                                    </a>
+        
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2 col-lg-4 col-xl-6 d-none d-md-block bg-cover"
+                                                style="background-image: url(../images/Icons/slider/cha_gio.jpg);">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Item -->
+                                <div class="w-100">
+                                    <div class="card bg-cover"
+                                        style="background-image: url(../images/Icons/slider/grilled_beef_tenderloin_meat_with_vegetable.jpg)">
+                                        <div class="row align-items-center" style="min-height: 400px; background-color: rgba(110, 110, 110, 0.25);">
+                                            <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+                                                <div class="card-body px-md-10 py-11">
+        
+                                                    <!-- Heading -->
+                                                    <h4 class="mb-5">50% discount on total invoice</h4>
+        
+                                                    <!-- Text -->
+                                                    <p class="mb-7">
+                                                        Applies to Wednesdays of the week. <br>
+                                                        <strong class="text-primary">10:00 - 16:00</strong>
+                                                    </p>
+        
+                                                    <!-- Button -->
+                                                    <a class="btn btn-outline-dark" href="shop.html">
+                                                        Shop Now <i class="fe fe-arrow-right ms-2"></i>
+                                                    </a>
+        
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Item -->
+                                <div class="w-100">
+                                    <div class="card bg-cover"
+                                        style="background-image: url(../images/Icons/slider/total_business_lunch_table.jpg);">
+                                        <div class="row align-items-center" style="min-height: 400px; background-color: rgba(110, 110, 110, 0.25);">
+                                            <div class="col-12">
+                                                <div class="card-body px-md-10 py-11 text-center text-white">
+        
+                                                    <!-- Preheading -->
+                                                    <p class="text-uppercase">Enjoy an extra</p>
+        
+                                                    <!-- Heading -->
+                                                    <h1 class="display-4 text-uppercase">50% off</h1>
+        
+                                                    <!-- Link -->
+                                                    <p class="link-underline text-reset">For birthdays</p>
+        
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-pagination"></div>
+                    </div>
+
+                    <!-- Header -->
+                    <div class="row align-items-center mb-7">
+                        <div class="col-12 col-md">
+
+                            <!-- Heading -->
+                            <h3 class="mb-1">All Products</h3>
+
+                            <!-- Breadcrumb -->
+                            <ol class="breadcrumb mb-md-0 fs-xs text-gray-400">
+                                <li class="breadcrumb-item">
+                                    <a class="text-gray-400" href="index.html">Menu</a>
+                                </li>
+                                <li class="breadcrumb-item active">
+                                    All Products
+                                </li>
+                            </ol>
+
+                        </div>
+                        <div class="col-12 col-md-4 py-3">
+                            <div class="search-box">
+                                <form action="" method="get" class="d-flex">
+                                    <input type="text" class="search-input" placeholder="Search..">
+
+                                    <button class="search-button" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-auto">
+
+                            <!-- Select -->
+                            <select class="form-select form-select-xs">
+                                <option selected>Most popular</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="row mb-7">
+                        <div class="col-12">
+
+                            <span class="btn btn-xs btn-light fw-normal text-muted me-3 mb-3">
+                                Spring <a class="text-reset ms-2" href="#!" role="button">
+                                    <i class="fe fe-x"></i>
+                                </a>
+                            </span>
+                            <span class="btn btn-xs btn-light fw-normal text-muted me-3 mb-3">
+                                Starter 4 <a class="text-reset ms-2" href="#!" role="button">
+                                    <i class="fe fe-x"></i>
+                                </a>
+                            </span>
+                            <span class="btn btn-xs btn-light fw-normal text-muted me-3 mb-3">
+                                Main course 4 <a class="text-reset ms-2" href="#!" role="button">
+                                    <i class="fe fe-x"></i>
+                                </a>
+                            </span>
+                            <span class="btn btn-xs btn-light fw-normal text-muted me-3 mb-3">
+                                Mide dish 4 <a class="text-reset ms-2" href="#!" role="button">
+                                    <i class="fe fe-x"></i>
+                                </a>
+                            </span>
+                            <span class="btn btn-xs btn-light fw-normal text-muted me-3 mb-3">
+                                Dessert 4 <a class="text-reset ms-2" href="#!" role="button">
+                                    <i class="fe fe-x"></i>
+                                </a>
+                            </span>
+                            <span class="btn btn-xs btn-light fw-normal text-muted me-3 mb-3">
+                                Drinks and Beverages 4 <a class="text-reset ms-2" href="#!" role="button">
+                                    <i class="fe fe-x"></i>
+                                </a>
+                            </span>
+                            <span class="btn btn-xs btn-light fw-normal text-muted me-3 mb-3">
+                                $10.00 - $49.00 <a class="text-reset ms-2" href="#!" role="button">
+                                    <i class="fe fe-x"></i>
+                                </a>
+                            </span>
+                            <span class="btn btn-xs btn-light fw-normal text-muted me-3 mb-3">
+                                $50.00 - $99.00 <a class="text-reset ms-2" href="#!" role="button">
+                                    <i class="fe fe-x"></i>
+                                </a>
+                            </span>
+
+                        </div>
+                    </div>
+
+                    <!-- Products -->
+                    <div class="row">
+                        <div class="col-6 col-md-4" th:each="product : ${listProducts}">
+
+                            <!-- Card -->
+                            <div class="card mb-7">
+
+                                <!-- Badge -->
+                                <div th:if="${product.sale} > 0" class="badge bg-dark card-badge card-badge-start text-uppercase">
+                                    Sale
+                                </div>
+
+                                <!-- Image -->
+                                <div class="card-img">
+
+                                    <!-- Image -->
+                                    <a class="card-img-hover" href="product.html">
+                                        <img class="card-img-top card-img-back"  alt="..." th:src="@{../images/} + ${product.category} + '/' + ${product.season} + '/' + ${product.country} + '/' + ${product.image}">
+<!--                                        <img class="card-img-top card-img-front"-->
+<!--                                            src="../images/Main_course/Spring/Chau_A/fried_chicken_wings_with_fish_sauce_sweet_fish_sauce.jpg"-->
+<!--                                            alt="...">-->
+                                    </a>
+
+                                    <!-- Actions -->
+                                    <div class="card-actions">
+                                        <span class="card-action">
+                                            <button class="btn btn-xs btn-circle btn-white-primary"
+                                                data-bs-toggle="modal" data-bs-target="#modalProduct">
+                                                    <i class="fe fe-eye"></i>
+                                            </button>
+                                        </span>
+                                        <span class="card-action">
+                                            <button class="btn btn-xs btn-circle btn-white-primary"
+                                                data-toggle="button">
+                                                <a href="/showLogin" class="add-to-cart" th:data-product-id="${product.id}">
+                                                    <i class="fe fe-shopping-cart"></i>
+                                                </a>
+                                            </button>
+                                        </span>
+                                        <span class="card-action">
+                                            <button class="btn btn-xs btn-circle btn-white-primary"
+                                                data-toggle="button">
+                                                <i class="fe fe-heart"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                                <!-- Body -->
+                                <div class="card-body px-0">
+
+                                    <!-- Category -->
+                                    <div class="fs-xs">
+                                        <a class="text-muted" href="shop.html" th:text="${product.category}">Main Course</a>
+                                    </div>
+
+                                    <!-- Title -->
+                                    <div class="fw-bold">
+                                        <a class="text-body" href="product.html" th:text="${product.name}">
+                                            Fried chicken wings with fish sauce sweet fish sauce
+                                        </a>
+                                    </div>
+
+                                    <!-- Price -->
+                                    <div class="fw-bold text-muted" th:text="${product.price}">
+                                        $129.00
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav class="d-flex justify-content-center justify-content-md-end">
+                        <ul class="pagination pagination-sm text-gray-400">
+                            <li class="page-item">
+                                <a class="page-link page-link-arrow" href="#">
+                                    <i class="fa fa-caret-left"></i>
+                                </a>
+                            </li>
+                            <li class="" th:each="pageNumber, pageIndex : ${#numbers.sequence(0, listProducts.totalPages - 1)}" th:class="${pageIndex.index + 1} == 1 ? 'paginate_button page-item active' : 'paginate_button page-item'">
+                                <a href="#" th:text="${pageIndex.index + 1}" th:href="@{'?page=' + ${pageIndex.index}}" class="page-link pageNumberLink"></a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link page-link-arrow" href="#">
+                                    <i class="fa fa-caret-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-7 py-md-9 bg-black">
+        <div class="container px-4">
+            <div class="row gx-7 justify-content-between">
+                <div class="col-sm-4 mt-2">
+
+                    <!-- Heading -->
+                    <h5 class="text-xs text-primary">
+                        About Us
+                    </h5>
+
+                    <!-- Text -->
+                    <p class="mb-6">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti dolorum, sint corporis
+                        nostrum, possimus unde eos vitae eius quasi saepe.
+                    </p>
+
+                </div>
+                <div class="col-sm-4 mt-2">
+
+                    <!-- Heading -->
+                    <h5 class="text-xs text-primary">
+                        Contact info
+                    </h5>
+
+                    <!-- List -->
+                    <ul class="list-unstyled mb-6">
+                        <li class="d-flex mb-2">
+                            <div class="fas fa-map-marker-alt me-3 mt-2 fs-sm"></div>
+                            1234 Vietname Str., Viet Nam, VN 12345-0000
+                        </li>
+                        <li class="d-flex mb-2">
+                            <div class="fas fa-phone me-3 mt-2 fs-sm"></div>
+                            +1 987 654 3210
+                        </li>
+                        <li class="d-flex">
+                            <div class="far fa-envelope me-3 mt-2 fs-sm"></div> <a
+                                href="mailto:admin@domain.com">admin@domain.com</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="col-sm-3 mt-2">
+
+                    <!-- Heading -->
+                    <h5 class="text-xs text-primary">
+                        Opening hours
+                    </h5>
+
+                    <!-- Text -->
+                    <div class="mb-3">
+                        <div class="text-xs">Monday - Thursday</div>
+                        <div class="font-serif">10:00 AM - 11:00 PM</div>
+                    </div>
+
+                    <!-- Text -->
+                    <div class="mb-6">
+                        <div class="text-xs">Friday - Sunday</div>
+                        <div class="font-serif">12:00 AM - 03:00 AM</div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+
+                    <!-- Copyright -->
+                    <div class="d-flex align-items-center" style="color: #6c757d">
+                        <hr class="hr-sm me-3" style="height: 1px;" /> &copy; 2021 Touché. All rights reserved.
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!--  -->
+    <!-- TOAST -->
+    <div class="toast position-fixed bottom-0 start-50 translate-middle-x mb-3 mb-md-5" id="notification" role="alert"
+        aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body mx-auto"></div>
+        </div>
+    </div>
+
+    <!-- MODAL -->
+    <div class="offcanvas offcanvas-end" id="modalShoppingCart" tabindex="-1"
+        style="visibility: visible; font-family: 'Lato' !important;" aria-modal="true" role="dialog">
+
+        <!-- Full cart (add `.d-none` to disable it) -->
+        <div th:if="${listSP} != null">
+            <!-- Close -->
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="fe fe-x" aria-hidden="true"></i>
+            </button>
+
+            <!-- Header-->
+            <div class="offcanvas-header lh-fixed fs-lg">
+                <strong class="mx-auto">Your Cart (2)</strong>
+            </div>
+
+            <!-- List group -->
+            <ul class="list-group list-group-lg list-group-flush">
+                <li class="list-group-item" th:each="sp : ${listSP}">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+
+                            <!-- Image -->
+                            <a href="./product.html">
+                                <img class="img-fluid"
+                                     src="#"
+                                     th:src="@{../images/} + ${sp.products.category} + '/' + ${sp.products.season} + '/' + ${sp.products.country} + '/' + ${sp.products.image}"
+                                     alt="...">
+                            </a>
+
+                        </div>
+                        <div class="col-8">
+
+                            <!-- Title -->
+                            <p class="fs-sm fw-bold mb-6">
+                                <a class="text-body" href="./product.html" th:text="${sp.products.name}">Deep fried spring rolls</a> <br>
+                                <span class="text-muted" th:text="${sp.products.price}">$40.00</span>
+                            </p>
+
+                            <!--Footer -->
+                            <div class="d-flex align-items-center">
+
+                                <!-- Select -->
+                                <select class="form-select form-select-xxs w-auto">
+                                    <option value="1" th:text="${sp.quantity}">1</option>
+                                    <!--                                <option value="1">2</option>-->
+                                    <!--                                <option value="1">3</option>-->
+                                </select>
+
+                                <!-- Remove -->
+                                <a class="fs-xs text-gray-400 ms-auto remove-to-cart" href="#" th:data-product-id="${sp.id}">
+                                    <i class="fe fe-x"></i> Remove
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Footer -->
+            <div class="offcanvas-footer justify-between lh-fixed fs-sm bg-light">
+                <strong>Subtotal</strong> <strong class="ms-auto">$89.00</strong>
+            </div>
+
+            <!-- Buttons -->
+            <div class="offcanvas-body">
+                <a class="btn w-100 btn-dark" href="./checkout.html">Continue to Checkout</a>
+                <a class="btn w-100 btn-outline-dark mt-2" href="/shopping-cart">View Cart</a>
+            </div>
+        </div>
+
+        <!-- Empty cart (remove `.d-none` to enable it) -->
+        <div class="" th:if="${listSP} == null">
+
+            <!-- Close -->
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="fe fe-x" aria-hidden="true"></i>
+            </button>
+
+            <!-- Header-->
+            <div class="offcanvas-header lh-fixed fs-lg">
+                <strong class="mx-auto">Your Cart (0)</strong>
+            </div>
+
+            <!-- Body -->
+            <div class="offcanvas-body flex-grow-0 my-auto">
+
+                <!-- Heading -->
+                <h6 class="mb-7 text-center">Your cart is empty 😞</h6>
+
+                <!-- Buttons -->
+                <div class="offcanvas-body">
+                    <a class="btn w-100 btn-dark" href="/shopping-cart">View Cart</a>
+                    <a class="btn w-100 btn-outline-dark mt-2" href="/menu">Continue Shopping</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <!-- Vendor JS -->
+    <script src="../JS/cart_vendor.js"></script>
+
+    <!-- Theme JS -->
+    <script src="../JS/cart_theme.js"></script>
+
+     <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!--  JQuery  -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        window.addEventListener('scroll', function () {
+            var scrollPosition = window.scrollY;
+
+            var navbar = document.querySelector('.navbar');
+            var formFixed = document.querySelector('.form-fixed');
+
+            var scrollThreshold = 20;
+            var scrollThreshold1 = 500;
+
+            if (scrollPosition > scrollThreshold) {
+                navbar.classList.add('navbar-light');
+                navbar.classList.remove('navbar-dark');
+            } else {
+                navbar.classList.remove('navbar-light');
+                navbar.classList.add('navbar-dark');
+            }
+
+            if (scrollPosition > scrollThreshold1) {
+                formFixed.classList.add('form-position-fixed');
+            } else {
+                formFixed.classList.remove('form-position-fixed');
+            }
+        });
+
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+            },
+        });
+    </script>
+
+    <script sec:authorize="isAuthenticated()">
+        $(".add-to-cart").click(function(event) {
+            console.log("zo");
+            event.preventDefault();
+
+            var productId = $(this).data('product-id');
+
+
+            var requestData = {
+                id: productId,
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/add-to-cart",
+                contentType: "application/json", // Set the content type to JSON
+                data: JSON.stringify(requestData), // Convert data to JSON string
+                success: function(response) {
+                    if (response.status === "success") {
+                        // Handle success - update the cart display on the website
+                        // Example: Add the product to the cart list
+                    } else {
+                        // Handle error if any
+                    }
+                },
+                error: function() {
+                    // Handle error if any
+                }
+            });
+        });
+
+        $(".remove-to-cart").click(function(event) {
+            console.log("zo");
+            event.preventDefault();
+
+            var productId = $(this).data('product-id');
+            console.log(productId);
+
+            $.ajax({
+                type: "POST",
+                url: "/remove-to-cart",
+                contentType: "application/json", // Set the content type to JSON
+                data: JSON.stringify(productId), // Convert data to JSON string
+                success: function(response) {
+                    if (response.status === "success") {
+                        // Handle success - update the cart display on the website
+                        // Example: Add the product to the cart list
+                    } else {
+                        // Handle error if any
+                    }
+                },
+                error: function() {
+                    // Handle error if any
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

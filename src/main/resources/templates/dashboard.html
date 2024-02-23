@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="IE-edge" http-equiv="X-UA-Compatible">
+        <meta content="width=device-width, intial-scale=1.0" name="viewport">
+
+        <!-- Title -->
+        <title>Dashboard</title>
+
+        <!-- Fav-icon -->
+        <link rel="shortcut icon" href="../images/fav-icon.png"/>
+
+        <!-- Import-poppins-font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+        <!-- Import-Monoton-Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+
+        <!-- Using-Font-Awesome -->
+        <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+        <!-- Using-Boostrap-CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/style.css">
+
+        <style>
+            body{
+                 font-family: poppins;
+            }
+        </style>
+    </head>
+    <body style="background-color: #fff;">
+    <!-- Wrapper -->
+    <div class="wrapper">
+        <!-- Slider -->
+        <nav id="sidebar" class="sidebar">
+            <!-- Logo -->
+            <a class="sidebar-brand" href="/">
+                DASHBOARD
+            </a>
+            <!-- Content -->
+            <div class="sidebar-content">
+                <!-- user -->
+                <div class="sidebar-user">
+                    <img src="https://spark.bootlab.io/img/avatars/avatar.jpg" class="img-fluid rounded-circle mb-2" alt="Linda Miller">
+                    <div class="fw-medium fs-6">DungVipPro</div>
+                    <small>Full stack Developer</small>
+                </div>
+                <!-- nav -->
+                <ul class="sidebar-nav">
+                    <!-- Title -->
+                    <li class="sidebar-header">
+                        Main
+                    </li>
+                    <!-- Item-dowpdown -->
+                    <li class="sidebar-item active">
+                        <a data-bs-target="#dashboards" data-bs-toggle="collapse" class="sidebar-link" aria-expanded="true">
+                            <i class="align-middle me-2 fas fa-fw fa-home"></i> <span class="align-middle sidebar-head-link">Dashboards</span>
+                        </a>
+                        <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show" data-bs-parent="#sidebar">
+                            <li class="sidebar-item active"><a class="sidebar-link" href="/dashboard">Users Manager</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/dashboard-products">Products Manager</a></li>
+                        </ul>
+                    </li>
+                    <!-- Title -->
+                    <li class="sidebar-header">
+                        Elements
+                    </li>
+                    <!-- Item-dowpdown -->
+                    <li class="sidebar-item">
+                        <a data-bs-target="#charts" data-bs-toggle="collapse" class="sidebar-link collapsed">
+                            <i class="align-middle me-2 fas fa-fw fa-chart-pie"></i> <span class="align-middle sidebar-head-link">Charts</span>
+                            <span class="sidebar-badge badge rounded-pill bg-primary">New</span>
+                        </a>
+                        <ul id="charts" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+                            <li class="sidebar-item"><a class="sidebar-link" href="/charts-chartjs">Chart.js</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/charts-apexcharts">ApexCharts</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Slider-end -->
+        <!-- Main -->
+        <div class="main bg-light">
+            <!-- nav -->
+            <nav class="navbar navbar-expand navbar-theme py-0 px-2 me-2">
+                <!-- icon -->
+                <a class="sidebar-toggle d-flex me-2">
+                    <i class="hamburger align-self-center"></i>
+                </a>
+                <!-- input -->
+                <form class="d-none d-sm-inline-block nav_input">
+                    <input class="form-control form-control-lite" type="text" placeholder="Search projects...">
+                </form>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown ms-lg-2 pe-4 me-2">
+                            <a class="nav-link dropdown-toggle position-relative" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="align-middle fas fa-cog fa-lg"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#"><i class="align-middle me-1 fas fa-fw fa-user"></i> View Profile</a>
+                                <a class="dropdown-item" href="/index"><i class="align-middle me-1 fas fa-fw fa-comments"></i> View Index</a>
+                                <a class="dropdown-item" href="#"><i class="align-middle me-1 fas fa-fw fa-chart-pie"></i> Analytics</a>
+                                <a class="dropdown-item" href="#"><i class="align-middle me-1 fas fa-fw fa-cogs"></i> Settings</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout"><i class="align-middle me-1 fas fa-fw fa-arrow-alt-circle-right"></i> Sign out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- content -->
+            <main class="content">
+                <div class="container-fluid">
+                    <div class="header">
+                        <h1 class="header-title pt-4"> Tables </h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Users Manager DataTables</h5>
+                                    <h6 class="card-subtitle text-muted">Highly flexible tool that many advanced features to any HTML table. See official
+                                        documentation <a href="https://datatables.net/extensions/responsive/" target="_blank" rel="noopener noreferrer nofollow">here</a>.</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="datatables-reponsive_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                        <div class="row px-2">
+                                            <div class="col-sm-12 col-md-6  d-flex">
+                                                <div class="dataTables_length" id="datatables-reponsive_length">
+                                                    <label>Show
+                                                        <select id="pageSizeSelect" name="datatables-reponsive_length" aria-controls="datatables-reponsive" class="form-select form-select-sm">
+                                                            <option value="20">20</option>
+                                                            <option value="15">15</option>
+                                                            <option value="10">10</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                        entries
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6 d-flex justify-content-end">
+                                                <div id="datatables-reponsive_filter" class="dataTables_filter">
+                                                    <form action="#" th:action="@{/search-users}" method="GET">
+                                                        <label>Search:</label>
+                                                        <input name="email" type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-reponsive">
+                                                        <button type="submit" style="
+                                                            background-color: #fff;
+                                                            border: 2px solid #eaeafe;
+                                                            padding: 2px 6px;
+                                                        "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="
+                                                            height: 20px;
+                                                            width: 22px;
+                                                        "><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6 .1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row dt-row">
+                                        <div class="col-sm-12 cc">
+                                            <table id="datatables-reponsive" class="table table-striped dataTable no-footer dtr-inline" style="width: 100%;" aria-describedby="datatables-reponsive_info">
+                                                <thead>
+                                                <tr>
+                                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="datatables-reponsive" rowspan="1" colspan="1" style="width: 185px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Email</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatables-reponsive" rowspan="1" colspan="1" style="width: 133px;" aria-label="Office: activate to sort column ascending">Full name</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatables-reponsive" rowspan="1" colspan="1" style="width: 76px;" aria-label="Age: activate to sort column ascending">Phone</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatables-reponsive" rowspan="1" colspan="1" style="width: 120px;" aria-label="Start date: activate to sort column ascending">Date</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatables-reponsive" rowspan="1" colspan="1" style="width: 250px;" aria-label="Position: activate to sort column ascending">Role</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatables-reponsive" rowspan="1" colspan="1" style="width: 103px;" aria-label="Salary: activate to sort column ascending">Action</th></tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="odd" th:each="users, iterStat : ${listUsers}" th:class="${iterStat.index % 2 == 0 ? 'odd' : 'even'}">
+                                                        <td class="dtr-control sorting_1" tabindex="0" th:text="${users.userName}">Airi Satou</td>
+                                                        <td th:text="${users.userInfo.name}">Accountant</td>
+                                                        <td th:text="${users.userInfo.phone}">Tokyo</td>
+                                                        <td th:text="${users.userInfo.birthDay}">33</td>
+                                                        <td th:text="${users.authorities.authority}" class="">2008/11/28</td>
+                                                        <td class="">
+                                                            <a href="#" th:href="@{/getUsers(id=${users.userName})}"><i class="align-middle fas fa-fw fa-pen"></i></a>
+                                                            <a href="#" th:href="@{/deleteUsers(id=${users.userName})}"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row footer_table">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="datatables-reponsive_info" role="status" aria-live="polite">
+                                                Showing <span th:text="${listUsers.number} * ${listUsers.size} == 0 ? 1 : (${listUsers.number} * ${listUsers.size}) + 1">1</span> to <span th:text="${listUsers.totalElements} - (${listUsers.number} * ${listUsers.size} + ${listUsers.size}) < 0 ? ${listUsers.totalElements} : (${listUsers.number} * ${listUsers.size} + ${listUsers.size})">10</span> of <span th:text="${listUsers.totalElements}">57</span> entries
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="datatables-reponsive_paginate">
+                                                <th:block th:if="${listUsers.totalPages > 1}">
+                                                    <ul class="pagination">
+                                                        <li class="paginate_button page-item previous disabled" id="datatables-reponsive_previous">
+                                                            <a aria-controls="datatables-reponsive" aria-disabled="true" aria-role="link" data-dt-idx="previous" tabindex="0" class="page-link">
+                                                                Previous
+                                                            </a>
+                                                        </li>
+                                                        <li th:each="pageNumber : ${#numbers.sequence(1, listUsers.totalPages)}" th:class="pageNumber == 1 ? 'paginate_button page-item active' : 'paginate_button page-item'">
+                                                            <a th:href="@{?(page=${pageNumber}-1)}" th:text="${pageNumber}" class="page-link pageNumber"></a>
+                                                        </li>
+                                                        <li class="paginate_button page-item next" id="datatables-reponsive_next"><a href="#" aria-controls="datatables-reponsive" aria-role="link" data-dt-idx="next" tabindex="0" class="page-link">Next</a>
+                                                    </li>
+                                                    </ul>
+                                                </th:block>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="account" role="tabpanel">
+
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-actions float-end">
+                                                <a href="/dashboard" class="me-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw align-middle"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                                                </a>
+                                                <div class="d-inline-block dropdown show">
+                                                    <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                                                    </a>
+
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <a class="dropdown-item" href="#">Action</a>
+                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h5 class="card-title mb-0">Public info</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form action="#" method="post" th:action="@{/save-users}" th:object="${user}">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="mb-3">
+                                                            <label for="inputemail">Email Address</label>
+                                                            <input type="text" class="form-control" id="inputemail" placeholder="Username" th:field="*{userName}">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="inputpassword">Password</label>
+                                                            <input type="password" class="form-control" id="inputpassword" placeholder="password" th:field="*{password}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="text-center">
+                                                            <img alt="Chris Wood" src="https://spark.bootlab.io/img/avatars/avatar.jpg" class="rounded-circle img-responsive mt-2" width="128" height="128">
+                                                            <div class="mt-2">
+                                                                <span class="btn btn-primary"><i class="fas fa-upload"></i> Upload</span>
+                                                            </div>
+                                                            <small>For best results, use an image at least 128px by 128px in .jpg
+                                                                format</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="mb-3 col-md-6">
+                                                        <label for="inputFullName">First name</label>
+                                                        <input type="text" class="form-control" id="inputFullName" placeholder="Full name" th:field="*{userInfo.name}">
+                                                    </div>
+                                                    <div class="mb-3 col-md-6">
+                                                        <label for="inputLastName">Last name</label>
+                                                        <input type="date" class="form-control" id="inputLastName" placeholder="BirthDay" th:field="*{userInfo.birthDay}">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="inputphone">Phone Number</label>
+                                                    <input type="text" class="form-control" id="inputphone" placeholder="Phone Number" th:field="*{userInfo.phone}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="inputAddress">Address</label>
+                                                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" th:field="*{userInfo.address}">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- footer -->
+            <footer class="footer pt-4 bg-light">
+                <div class="container-fluid pt-2 p-0">
+                    <div class="row text-muted">
+                        <div class="col-8 text-start  p-0">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <a class="text-muted" href="#">Support</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="text-muted" href="#">Privacy</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="text-muted" href="#">Terms of Service</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="text-muted" href="#">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-4 text-end">
+                            <p class="mb-0">
+                                © 2023 - <a class="text-muted" href="/dashboard-default">Spark</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- Main-end -->
+    </div>
+
+
+    <!-- Using-Boostrap-JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+    <script>
+        document.querySelector(".sidebar-toggle").onclick = function(){
+            document.querySelector("#sidebar").classList.toggle("toggled");
+        }
+
+        // Function to set the selected value in localStorage
+        function setSelectedSize(value) {
+            localStorage.setItem('selectedSize', value);
+        }
+
+        // Function to get the selected value from localStorage
+        function getSelectedSize() {
+            return localStorage.getItem('selectedSize');
+        }
+
+        // Get the pageSizeSelect element
+        var pageSizeSelect = document.getElementById('pageSizeSelect');
+
+        var storedSize = getSelectedSize();
+        if (storedSize) {
+            // Set the selected value in the select element
+            pageSizeSelect.value = storedSize;
+        }
+
+        pageSizeSelect.onchange = function() {
+            var selectedSize = this.value;
+
+            setSelectedSize(selectedSize);
+
+            var currentUrl = window.location.href;
+            var newUrl = currentUrl.split('?')[0] + '?size=' + selectedSize;
+            window.location.href = newUrl;
+         };
+    </script>
+    <script th:if="${listUsers.totalPages > 1}">
+        // Function to set the selected value in localStorage
+        function setSelectedSize(value) {
+            localStorage.setItem('selectedSize', value);
+        }
+
+        // Function to get the selected value from localStorage
+        function getSelectedSize() {
+            return localStorage.getItem('selectedSize');
+        }
+
+        // Get the pageSizeSelect element
+        var pageSizeSelect = document.getElementById('pageSizeSelect');
+
+        var storedSize = getSelectedSize();
+        if (storedSize) {
+            // Set the selected value in the select element
+            pageSizeSelect.value = storedSize;
+        }
+
+        // Lấy URL hiện tại
+        var currentUrl = window.location.href;
+
+        // Tìm vị trí của dấu '?' trong URL
+        var queryIndex = currentUrl.indexOf('?');
+
+        // Kiểm tra xem có tồn tại dấu '?' trong URL không
+        if (queryIndex !== -1) {
+            // Nếu có, cắt chuỗi từ vị trí của dấu '?' và lấy phần truy vấn
+            var queryString = currentUrl.substring(queryIndex + 1);
+            document.querySelectorAll('.pageNumber').forEach(function(pageNumberSelect){
+                var ccc = pageNumberSelect.href + '&' + queryString
+                pageNumberSelect.href = ccc
+            })
+        } else {
+            console.log('URL không chứa tham số truy vấn.');
+        }
+    </script>
+    </body>
+</html>

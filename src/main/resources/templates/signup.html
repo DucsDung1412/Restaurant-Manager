@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Font-Awesome -->
+  <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../Images/Icons/logo/app-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../Images/Icons/logo/appicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../Images/Icons/logo/appicon-16x16.png" />
+  <link rel="manifest" href="../Json/manifest.json" />
+  <link rel="mask-icon" href="../Images/Icons/logo/safari-pinned-tab.svg" color="#5bbad5" />
+  <link rel="shortcut icon" href="../Images/Icons/logo/appicon.ico" />
+  <meta name="msapplication-config"
+    content="https://yevgenysim-turkey.github.io/touche/assets/favicon/browserconfig.xml" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../CSS/style.css">
+
+  <!-- Using-Boostrap-CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <!-- Libs CSS -->
+  <link rel="stylesheet" href="../CSS/main_libs.css" />
+
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="https://yevgenysim-turkey.github.io/shopper/assets/css/theme.bundle.css" />
+
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="../CSS/main_theme.css" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Map -->
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" />
+
+  <style>
+    .offcanvas-end {
+      width: 470px !important;
+    }
+
+    .offcanvas-header {
+      border-bottom: 1px solid #e5e5e5;
+      padding: 1.5rem 2rem !important;
+    }
+
+    .list-group-item p a,
+    .list-group-item p span,
+    .offcanvas-body a {
+      font-size: 0.925rem !important;
+    }
+
+    .form-select-xxs {
+      background-position: right 0.5rem center !important;
+      padding-right: 2.5rem !important;
+    }
+
+    .form-control-xxs,
+    .form-select-xxs {
+      font-size: 0.9375rem !important;
+      height: calc(1.78125rem + 2px);
+      line-height: 1.5 !important;
+      padding-bottom: 0.1875rem !important;
+      padding-left: 0.5rem !important;
+      padding-top: 0.1875rem !important;
+    }
+
+    .list-group .mb-6 {
+      margin-bottom: 1.5rem !important;
+    }
+
+    .list-group-item a {
+      text-decoration: none !important;
+    }
+
+    .offcanvas-body {
+      padding: 2rem !important;
+    }
+
+    .nav-link.active:before {
+      border-top: 0px solid #ff6f61 !important;
+    }
+
+    .gallery a img {
+      width: 100%;
+      height: 200px;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide:hover {
+      cursor: grab;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      padding: 22px;
+      border: 2px solid #e9ecef;
+      border-radius: 50%;
+      background-color: #e9ecef;
+      margin: auto 0;
+    }
+
+    .swiper-button-next:after,
+    .swiper-rtl .swiper-button-prev:after {
+      content: "next";
+      font-size: 20px;
+      font-weight: bolder;
+      margin-left: 4px;
+      color: #000;
+    }
+
+    .swiper-rtl .swiper-button-next:after,
+    .swiper-button-prev:after {
+      content: "prev";
+      font-size: 20px;
+      font-weight: bolder;
+      margin-right: 4px;
+      color: #000;
+    }
+
+    .number-cart {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 10px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: red;
+      color: #fff;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+
+  <!-- Title -->
+  <title>Café &amp; Restaurant</title>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-dark navbar-expand-lg navbar-togglable fixed-top">
+    <div class="container">
+
+      <!-- Navbar brand (mobile) -->
+      <a class="navbar-brand d-lg-none" href="/index">Logo</a>
+
+      <!-- Navbar toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+              aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar collapse -->
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+
+        <!-- Navbar nav -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link " href="#">About
+              Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/menu">Menu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href=".#">Reservation</a>
+          </li>
+        </ul>
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand d-none d-lg-flex mx-lg-auto" href="/index">
+          Logo
+        </a>
+
+        <!-- Navbar nav -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link " href="#">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/showLogin">Login</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+  <!-- Navigation end -->
+  <!-- HEADER -->
+  <header data-jarallax data-speed=".8"
+    style="height: 48vh;background-image: url(https://yevgenysim-turkey.github.io/touche/assets/img/23.jpg);">
+    <div class="pt-10 pb-8 pt-md-15 bg-black-50" style="height: 100%;">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6 text-center">
+
+            <!-- Heading -->
+            <h1 class="display-6 fw-bold text-white">
+              SIGN UP
+            </h1>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Profile -->
+  <section class="myProfile mb-5">
+    <div class="myProfileOwn bg-light shadow-lg rounded-3 overflow-hidden">
+      <div class="row">
+        <!-- Content-->
+        <section class="col-lg-12 pt-lg-4 pb-4 mb-3 d-flex justify-content-center align-items-center">
+          <!-- Signup -->
+          <div class="signin pt-2 ps-lg-0" style="width: 90%;">
+            <h1 class="h3 mb-3 text-sm-start text-center">Sign up</h1>
+            <p class="text-muted mb-4" style="font-size: 0.9rem !important;">Registration takes less than a minute but
+              gives you full control over your orders.</p>
+            <hr />
+            <form action="#" th:action="@{/signup}" method="POST" class="needs-validation" novalidate="">
+              <div class="row gx-4 gy-3">
+                <div class="col-sm-6 form-group">
+                  <label class="form-label" for="reg-fn">Full name</label>
+                  <input name="name" class="form-control" type="text" required="" id="reg-fn">
+                  <div class="invalid-feedback">Please enter your first name!</div>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label class="form-label" for="reg-email">E-mail Address</label>
+                  <input name="userName" class="form-control" type="email" required="" id="reg-email">
+                  <div class="invalid-feedback">Please enter valid email address!</div>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label class="form-label" for="reg-phone">Phone Number</label>
+                  <input name="phone" class="form-control" type="text" required="" id="reg-phone">
+                  <div class="invalid-feedback">Please enter your phone number!</div>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label class="form-label" for="reg-date">Date</label>
+                  <input name="birthDay" class="form-control" type="date" required id="reg-date">
+                  <div class="invalid-feedback">Please enter your last name!</div>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label class="form-label" for="reg-password">Password</label>
+                  <div class="password-toggle">
+                    <input name="password" class="form-control" type="password" id="reg-password" required="" ng-model="password"
+                      ng-blur="onBlur()">
+                    <label class="password-toggle-btn">
+                      <i class="fa-solid fa-eye fa-sm"></i>
+                      <i class="fa-solid fa-eye-slash fa-sm d-none"></i>
+                    </label>
+                  </div>
+                  <div class="invalid-feedback">Please enter password!</div>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label class="form-label" for="reg-password-confirm">Confirm Password</label>
+                  <div class="password-toggle">
+                    <input name="cfpassword" class="form-control" type="password" id="reg-password-confirm" required="" ng-model="password"
+                      ng-blur="onBlur()">
+                    <label class="password-toggle-btn">
+                      <i class="fa-solid fa-eye fa-sm"></i>
+                      <i class="fa-solid fa-eye-slash fa-sm d-none"></i>
+                    </label>
+                  </div>
+                  <div class="invalid-feedback">Passwords do not match!</div>
+                </div>
+                <hr />
+                <div class="col-12 mt-0 d-flex justify-content-between">
+                  <div class="change-to-signin">
+                    <span>Already have an account?</span>
+                    <a href="/showLogin" style="color: #c51e1e;">Login</a>
+                  </div>
+                  <button class="btn btn-primary d-flex justify-content-center align-items-center" type="submit">
+                    <i class="fa-solid fa-user pe-2"></i>
+                    Sign Up
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- Signup end -->
+        </section>
+      </div>
+    </div>
+  </section>
+  <!-- Profile-end -->
+
+  <!-- FOOTER -->
+  <footer class="py-7 py-md-9 bg-black">
+    <div class="container px-4">
+      <div class="row gx-7 justify-content-between">
+        <div class="col-sm-4 mt-2">
+
+          <!-- Heading -->
+          <h5 class="text-xs text-primary">
+            About Us
+          </h5>
+
+          <!-- Text -->
+          <p class="mb-6">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti dolorum, sint corporis
+            nostrum, possimus unde eos vitae eius quasi saepe.
+          </p>
+
+        </div>
+        <div class="col-sm-4 mt-2">
+
+          <!-- Heading -->
+          <h5 class="text-xs text-primary">
+            Contact info
+          </h5>
+
+          <!-- List -->
+          <ul class="list-unstyled mb-6">
+            <li class="d-flex mb-2">
+              <div class="fas fa-map-marker-alt me-3 mt-2 fs-sm"></div>
+              1234 Vietname Str., Viet Nam, VN 12345-0000
+            </li>
+            <li class="d-flex mb-2">
+              <div class="fas fa-phone me-3 mt-2 fs-sm"></div>
+              +1 987 654 3210
+            </li>
+            <li class="d-flex">
+              <div class="far fa-envelope me-3 mt-2 fs-sm"></div> <a href="mailto:admin@domain.com">admin@domain.com</a>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col-sm-3 mt-2">
+
+          <!-- Heading -->
+          <h5 class="text-xs text-primary">
+            Opening hours
+          </h5>
+
+          <!-- Text -->
+          <div class="mb-3">
+            <div class="text-xs">Monday - Thursday</div>
+            <div class="font-serif">10:00 AM - 11:00 PM</div>
+          </div>
+
+          <!-- Text -->
+          <div class="mb-6">
+            <div class="text-xs">Friday - Sunday</div>
+            <div class="font-serif">12:00 AM - 03:00 AM</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+
+          <!-- Copyright -->
+          <div class="d-flex align-items-center" style="color: #6c757d">
+            <hr class="hr-sm me-3" style="height: 1px;" /> &copy; 2021 Touché. All rights reserved.
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="offcanvas offcanvas-end" id="modalShoppingCart" tabindex="-1"
+    style="visibility: visible; font-family: 'Lato' !important;" aria-modal="true" role="dialog">
+
+    <!-- Full cart (add `.d-none` to disable it) -->
+
+    <!-- Close -->
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fe fe-x" aria-hidden="true"></i>
+    </button>
+
+    <!-- Header-->
+    <div class="offcanvas-header lh-fixed fs-lg">
+      <strong class="mx-auto">Your Cart (2)</strong>
+    </div>
+
+    <!-- List group -->
+    <ul class="list-group list-group-lg list-group-flush">
+      <li class="list-group-item">
+        <div class="row align-items-center">
+          <div class="col-4">
+
+            <!-- Image -->
+            <a href="./product.html">
+              <img class="img-fluid" src="../Images/Main_course/Spring/Chau_A/deep_fried_spring_rolls.jpg" alt="...">
+            </a>
+
+          </div>
+          <div class="col-8">
+
+            <!-- Title -->
+            <p class="fs-sm fw-bold mb-6">
+              <a class="text-body" href="./product.html">Deep fried spring rolls</a> <br>
+              <span class="text-muted">$40.00</span>
+            </p>
+
+            <!--Footer -->
+            <div class="d-flex align-items-center">
+
+              <!-- Select -->
+              <select class="form-select form-select-xxs w-auto">
+                <option value="1">1</option>
+                <option value="1">2</option>
+                <option value="1">3</option>
+              </select>
+
+              <!-- Remove -->
+              <a class="fs-xs text-gray-400 ms-auto" href="#!">
+                <i class="fe fe-x"></i> Remove
+              </a>
+
+            </div>
+
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row align-items-center">
+          <div class="col-4">
+
+            <!-- Image -->
+            <a href="./product.html">
+              <img class="img-fluid" src="../Images/Dessert/Spring/Chau_A/top_view_tasty_salad_with_tangerine.jpg"
+                alt="...">
+            </a>
+
+          </div>
+          <div class="col-8">
+
+            <!-- Title -->
+            <p class="fs-sm fw-bold mb-6">
+              <a class="text-body" href="./product.html">Salad with tangerine</a> <br>
+              <span class="text-muted">$49.00</span>
+            </p>
+
+            <!--Footer -->
+            <div class="d-flex align-items-center">
+
+              <!-- Select -->
+              <select class="form-select form-select-xxs w-auto">
+                <option value="1">1</option>
+                <option value="1">2</option>
+                <option value="1">3</option>
+              </select>
+
+              <!-- Remove -->
+              <a class="fs-xs text-gray-400 ms-auto" href="#!">
+                <i class="fe fe-x"></i> Remove
+              </a>
+
+            </div>
+
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Footer -->
+    <div class="offcanvas-footer justify-between lh-fixed fs-sm bg-light">
+      <strong>Subtotal</strong> <strong class="ms-auto">$89.00</strong>
+    </div>
+
+    <!-- Buttons -->
+    <div class="offcanvas-body">
+      <a class="btn w-100 btn-dark" href="./checkout.html">Continue to Checkout</a>
+      <a class="btn w-100 btn-outline-dark mt-2" href="cart.html">View Cart</a>
+    </div>
+
+    <!-- Empty cart (remove `.d-none` to enable it) -->
+    <div class="d-none">
+
+      <!-- Close -->
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="fe fe-x" aria-hidden="true"></i>
+      </button>
+
+      <!-- Header-->
+      <div class="offcanvas-header lh-fixed fs-lg">
+        <strong class="mx-auto">Your Cart (0)</strong>
+      </div>
+
+      <!-- Body -->
+      <div class="offcanvas-body flex-grow-0 my-auto">
+
+        <!-- Heading -->
+        <h6 class="mb-7 text-center">Your cart is empty 😞</h6>
+
+        <!-- Button -->
+        <a class="btn w-100 btn-outline-dark" href="#!">
+          Continue Shopping
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+  <!-- Using-Boostrap-JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> -->
+
+  <script src="../js/jQuery.js"></script>
+
+
+  <!-- JAVASCRIPT -->
+  <!-- Vendor JS -->
+  <script src="../JS/main_vendor.js"></script>
+
+  <!-- Theme JS -->
+  <script src="../JS/main_theme.js"></script>
+
+  <script>
+    window.addEventListener("scroll", function () {
+      var scrollPosition = window.scrollY;
+
+      var navbar = document.querySelector(".navbar");
+
+      var scrollThreshold = 20;
+
+      if (scrollPosition > scrollThreshold) {
+        navbar.classList.add("navbar-light");
+        navbar.classList.remove("navbar-dark");
+      } else {
+        navbar.classList.remove("navbar-light");
+        navbar.classList.add("navbar-dark");
+      }
+    });
+  </script>
+</body>
+
+</html>
