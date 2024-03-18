@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -45,7 +46,9 @@ public class SystemController {
     @PostMapping("/signup")
     @Transactional
     public String signup(@RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("userName") String userName, @RequestParam("password") String password, @RequestParam("birthDay") Date birthDay, @RequestParam("cfpassword") String cfpassword){
-        Users users = new Users(userName,"{noop}"+password,true);
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String enCode = bCryptPasswordEncoder.encode(password);
+        Users users = new Users(userName,"{bcrypt}"+enCode,true);
         Authorities authorities = new Authorities(users,"ROLE_USER");
         UserInfo userInfo = new UserInfo(name, null, phone, null, birthDay, users);
         this.userInfoService.save(userInfo);
@@ -199,7 +202,15 @@ public class SystemController {
     }
 
     @PostMapping("/save-users")
-    public String saveUsers(@ModelAttribute("user") Users user){
+    public String saveUsers(@ModelAttribute("user") Users user, @RequestParam("exampleRadios") String exampleRadios){
+        try {
+            Users u = usersService.findById(user.getUserName());
+            u.getAuthorities().setAuthority(exampleRadios);
+            user.setAuthorities(u.getAuthorities());
+        } catch (Exception e){
+            Authorities authorities = new Authorities(user, exampleRadios);
+            user.setAuthorities(authorities);
+        }
         this.usersService.save(user);
         return "redirect:/dashboard";
     }

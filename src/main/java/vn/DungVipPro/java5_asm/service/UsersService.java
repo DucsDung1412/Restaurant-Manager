@@ -40,9 +40,9 @@ public class UsersService {
                 }
             }
         } else {
-            Authorities authorities = new Authorities(u, "ROLE_USER");
             UserInfo userInfo = new UserInfo(u.getUserInfo().getName(), u.getUserInfo().getAddress(), u.getUserInfo().getPhone(), null, u.getUserInfo().getBirthDay(), u);
-            u.setAuthorities(authorities);
+//            Authorities authorities = new Authorities(u, "ROLE_USER");
+//            u.setAuthorities(authorities);
             u.setUserInfo(userInfo);
             u.setEnabled(true);
             u.setPassword("{noop}" + u.getPassword());
