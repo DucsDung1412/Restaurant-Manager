@@ -123,12 +123,16 @@ public class PageController {
         List<OrderDetails> cart = (List<OrderDetails>) session.getAttribute("cart");
 
         List<OrderDetails> cartRemove = (List<OrderDetails>) session.getAttribute("cartRemove");
-        if(cartRemove != null){
-            for (OrderDetails od : cartRemove){
-                if(this.orderDetailsService.findById(od.getId()) != null){
-                    this.orderDetailsService.delete(od);
+        try {
+            if(cartRemove != null){
+                for (OrderDetails od : cartRemove){
+                    if(this.orderDetailsService.findById(od.getId()) != null){
+                        this.orderDetailsService.delete(od);
+                    }
                 }
             }
+        } catch (Exception e){
+
         }
 
         List<OrderDetails> cartClone = new ArrayList<>();

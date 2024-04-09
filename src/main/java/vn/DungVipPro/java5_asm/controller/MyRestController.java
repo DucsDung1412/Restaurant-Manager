@@ -91,9 +91,14 @@ public class MyRestController {
             OrderDetails od = new OrderDetails(1, or, pp);
             cart.add(od);
         }
+        long i = 0L;
+        for (OrderDetails e : cart) {
+            e.setId(e.getId() == null ? i : e.getId());
+            i++;
+        };
         this.session.setAttribute("cart", cart);
         List<Map<String, Object>> s = new ArrayList<>();
-        long i = 0L;
+        i = 0L;
         for (OrderDetails e : cart) {
             Map<String, Object> map = new HashMap<>();
             if(e.getId() != null){
@@ -111,7 +116,7 @@ public class MyRestController {
     }
 
     @PostMapping("/remove-to-cart")
-    public String removeToCart(@RequestBody Long id){
+    public List<Map<String, Object>> removeToCart(@RequestBody Long id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         List<OrderDetails> cart = (List<OrderDetails>) session.getAttribute("cart");
@@ -127,20 +132,33 @@ public class MyRestController {
                 }
             }
         }
-
+        List<OrderDetails> cartTemp = new ArrayList<>();
         if (!cart.isEmpty()) {
             Iterator<OrderDetails> iterator = cart.iterator();
             while (iterator.hasNext()) {
                 OrderDetails od = iterator.next();
-                if (od.getId().equals(id)) { // Sử dụng phương thức equals() để so sánh ID
-                    iterator.remove();
-                    cartRemove.add(od);
-                    break;
+                if(od.getId() != null){
+                    if (od.getId().equals(id)) { // Sử dụng phương thức equals() để so sánh ID
+                        iterator.remove();
+                        cartRemove.add(od);
+                    } else {
+                        cartTemp.add(od);
+                    }
                 }
             }
         }
+        List<Map<String, Object>> s = new ArrayList<>();
+        for (OrderDetails e : cartTemp) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", e.getId());
+            map.put("price", e.getProducts().getPrice());
+            map.put("name", e.getProducts().getName());
+            map.put("avatar", "../images/" + e.getProducts().getCategory() + "/" + e.getProducts().getSeason() + "/" + e.getProducts().getCountry() + "/" + e.getProducts().getImage());
+            map.put("quantity", e.getQuantity());
+            s.add(map);
+        }
         this.session.setAttribute("cart", cart);
         this.session.setAttribute("cartRemove", cartRemove);
-        return "/index";
+        return s;
     }
 }

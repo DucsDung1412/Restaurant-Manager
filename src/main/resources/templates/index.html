@@ -1855,7 +1855,7 @@
             </div>
 
             <!-- List group -->
-            <ul class="list-group list-group-lg list-group-flush">
+            <ul id="cart-modal-product" class="list-group list-group-lg list-group-flush">
                 <li class="list-group-item" th:each="sp : ${listSP}">
                     <div class="row align-items-center">
                         <div class="col-4">
@@ -1981,7 +1981,7 @@
     </script>
 
     <script sec:authorize="isAuthenticated()">
-        $(".remove-to-cart").click(function(event) {
+        $(document).on('click', '.remove-to-cart', function(event) {
             console.log("zo");
             event.preventDefault();
 
@@ -1994,12 +1994,51 @@
                 contentType: "application/json", // Set the content type to JSON
                 data: JSON.stringify(productId), // Convert data to JSON string
                 success: function(response) {
-                    if (response.status === "success") {
-                        // Handle success - update the cart display on the website
-                        // Example: Add the product to the cart list
-                    } else {
-                        // Handle error if any
-                    }
+                    document.getElementById("cart-modal-product").innerHTML = "";
+                    response.forEach(r => {
+                        document.getElementById("cart-modal-product").innerHTML += `
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+
+                                        <!-- Image -->
+                                        <a href="./product.html">
+                                            <img class="img-fluid"
+                                                 src="${r.avatar}"
+                                                 alt="...">
+                                        </a>
+
+                                    </div>
+                                    <div class="col-8">
+
+                                        <!-- Title -->
+                                        <p class="fs-sm fw-bold mb-6">
+                                            <a class="text-body" href="./product.html">${r.name}</a> <br>
+                                            <span class="text-muted">${r.price}</span>
+                                        </p>
+
+                                        <!--Footer -->
+                                        <div class="d-flex align-items-center">
+
+                                            <!-- Select -->
+                                            <select class="form-select form-select-xxs w-auto">
+                                                <option value="1">${r.quantity}</option>
+                                                <!--                                <option value="1">2</option>-->
+                                                <!--                                <option value="1">3</option>-->
+                                            </select>
+
+                                            <!-- Remove -->
+                                            <a class="fs-xs text-gray-400 ms-auto remove-to-cart" href="#" data-product-id=${r.id}>
+                                                <i class="fe fe-x"></i> Remove
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                        `
+                    });
                 },
                 error: function() {
                     // Handle error if any
