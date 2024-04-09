@@ -13,27 +13,34 @@ import javax.sql.DataSource;
 @Configuration
 public class MySecurities {
 
-    @Bean
     @Autowired
-    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource){
+    private DataSource dataSource;
+
+    @Bean
+    public JdbcUserDetailsManager jdbcUserDetailsManager() {
         return new JdbcUserDetailsManager(dataSource);
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(config ->
-                config.requestMatchers("/shopping-cart").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/dashboard").hasRole("ADMIN")
-                        .requestMatchers("/dashboard-products").hasRole("ADMIN")
-                        .requestMatchers("/**").permitAll())
+                        config.requestMatchers("/shopping-cart").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/dashboard").hasRole("ADMIN")
+                                .requestMatchers("/dashboard-products").hasRole("ADMIN")
+                                .requestMatchers("/**").permitAll())
                 .formLogin(login -> {
                     login.loginPage("/showLogin").loginProcessingUrl("/authenticateTheUser").defaultSuccessUrl("/index").permitAll();
                 })
+                .rememberMe(rememberMe -> {
+                    rememberMe.key("remember-me")
+                            .userDetailsService(jdbcUserDetailsManager()).rememberMeCookieName("remember-me");
+                })
                 .logout(
-                    logout -> logout.permitAll()
+                        logout -> logout.permitAll()
                 );
         http.httpBasic(Customizer.withDefaults());
         http.csrf(csrf -> csrf.disable());
         return http.build();
     }
 }
+

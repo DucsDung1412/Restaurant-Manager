@@ -1,5 +1,6 @@
 package vn.DungVipPro.java5_asm.controller;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.aspectj.apache.bcel.util.ClassPath;
@@ -63,13 +64,19 @@ public class PageController {
     public String index(Model model, Pageable pageable) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
+        List<OrderDetails> cart = (List<OrderDetails>) session.getAttribute("cart");
         if(!username.equals("anonymousUser")){
-            Users u = this.usersService.findById(username);
-            for(Orders o : u.getUserInfo().getList()){
-                if(o.getStatusOrders()){
-                    model.addAttribute("listSP", o.getList());
-                    model.addAttribute("ListSPSize", o.getList().size());
-                    break;
+            if(cart != null){
+                model.addAttribute("listSP", cart);
+                model.addAttribute("ListSPSize", cart.size());
+            } else {
+                Users u = this.usersService.findById(username);
+                for(Orders o : u.getUserInfo().getList()){
+                    if(o.getStatusOrders()){
+                        model.addAttribute("listSP", o.getList());
+                        model.addAttribute("ListSPSize", o.getList().size());
+                        break;
+                    }
                 }
             }
         } else {
@@ -87,12 +94,17 @@ public class PageController {
     public String menu(Model model, Pageable pageable){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
+        List<OrderDetails> cart = (List<OrderDetails>) session.getAttribute("cart");
         if(!username.equals("anonymousUser")){
-            Users u = this.usersService.findById(username);
-            for(Orders o : u.getUserInfo().getList()){
-                if(o.getStatusOrders()){
-                    model.addAttribute("listSP", o.getList());
-                    break;
+            if(cart != null){
+                model.addAttribute("listSP", cart);
+            } else {
+                Users u = this.usersService.findById(username);
+                for(Orders o : u.getUserInfo().getList()){
+                    if(o.getStatusOrders()){
+                        model.addAttribute("listSP", o.getList());
+                        break;
+                    }
                 }
             }
         } else {
@@ -113,7 +125,9 @@ public class PageController {
         List<OrderDetails> cartRemove = (List<OrderDetails>) session.getAttribute("cartRemove");
         if(cartRemove != null){
             for (OrderDetails od : cartRemove){
-                this.orderDetailsService.delete(od);
+                if(this.orderDetailsService.findById(od.getId()) != null){
+                    this.orderDetailsService.delete(od);
+                }
             }
         }
 
