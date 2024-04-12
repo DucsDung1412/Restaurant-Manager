@@ -24,10 +24,10 @@ public class MySecurities {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(config ->
-                        config.requestMatchers("/shopping-cart").hasAnyRole("USER", "ADMIN")
-                                .requestMatchers("/dashboard").hasRole("ADMIN")
-                                .requestMatchers("/dashboard-products").hasRole("ADMIN")
-                                .requestMatchers("/**").permitAll())
+                config.requestMatchers("/shopping-cart").hasAnyRole("USER", "ADMIN")
+                    .requestMatchers("/dashboard").hasRole("ADMIN")
+                    .requestMatchers("/dashboard-products").hasRole("ADMIN")
+                    .requestMatchers("/**").permitAll())
                 .formLogin(login -> {
                     login.loginPage("/showLogin").loginProcessingUrl("/authenticateTheUser").defaultSuccessUrl("/index").permitAll();
                 })

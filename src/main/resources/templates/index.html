@@ -1851,7 +1851,7 @@
 
             <!-- Header-->
             <div class="offcanvas-header lh-fixed fs-lg">
-                <strong class="mx-auto">Your Cart (2)</strong>
+                <strong class="mx-auto">Your Cart (<span th:text="${count}">0</span>)</strong>
             </div>
 
             <!-- List group -->
@@ -1901,7 +1901,7 @@
 
             <!-- Footer -->
             <div class="offcanvas-footer justify-between lh-fixed fs-sm bg-light">
-                <strong>Subtotal</strong> <strong class="ms-auto">$89.00</strong>
+                <strong>Subtotal</strong> <strong class="ms-auto">$<span th:text="${price}">89.00</span></strong>
             </div>
 
             <!-- Buttons -->
@@ -2038,6 +2038,18 @@
                                 </div>
                             </li>
                         `
+                        const elements = document.querySelectorAll("#cart-modal-product .col-8");
+                        const sum = Array.from(elements).reduce((accumulator, currentElement) => {
+                            const value = parseFloat(currentElement.querySelector(".text-muted").textContent.trim() * currentElement.querySelector(".form-select").textContent.trim());
+                            return accumulator + (isNaN(value) ? 0 : value);
+                        }, 0);
+                        const count = Array.from(elements).reduce((accumulator, currentElement) => {
+                            const value = parseFloat(currentElement.querySelector(".form-select").textContent.trim());
+                            return accumulator + (isNaN(value) ? 0 : value);
+                        }, 0);
+
+                        document.querySelector(".offcanvas-footer .ms-auto").textContent = `$${sum}`;
+                        document.querySelector(".offcanvas-header .mx-auto").textContent = `Your Cart (${count})`;
                     });
                 },
                 error: function() {

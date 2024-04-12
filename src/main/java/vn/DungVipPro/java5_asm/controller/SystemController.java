@@ -60,34 +60,17 @@ public class SystemController {
     }
 
     @GetMapping("/remove-products")
-    public String removeProducts(Model model, @RequestParam("id") Long id){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-
+    public String removeProducts(@RequestParam("id") Long id){
         OrderDetails orderDetails = this.orderDetailsService.findById(id);
-        this.orderDetailsService.delete(orderDetails);
-
-        if(!username.equals("anonymousUser")){
-            Users u = this.usersService.findById(username);
-            for(Orders o : u.getUserInfo().getList()){
-                if(o.getStatusOrders()){
-                    model.addAttribute("listSP", o.getList());
-
-                    Double subtotal = 0.0;
-                    for (OrderDetails ords : o.getList()){
-                        subtotal = subtotal + (ords.getProducts().getPrice() * ords.getQuantity());
-                    };
-                    subtotal = (double) Math.round(subtotal * 100) / 100;
-
-                    model.addAttribute("subtotal", subtotal);
-                    break;
-                }
-                }
+        if(orderDetails.getQuantity() < 2){
+            this.orderDetailsService.delete(orderDetails);
         } else {
-            model.addAttribute("listSP", null);
+            int quantity = orderDetails.getQuantity() - 1;
+            orderDetails.setQuantity(quantity);
+            this.orderDetailsService.save(orderDetails);
         }
 
-        return "/cart";
+        return "redirect:/shopping-cart";
     }
 
     @GetMapping("/search-users")

@@ -65,6 +65,8 @@ public class PageController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         List<OrderDetails> cart = (List<OrderDetails>) session.getAttribute("cart");
+        int count = 0;
+        double price = 0;
         if(!username.equals("anonymousUser")){
             if(cart != null){
                 model.addAttribute("listSP", cart);
@@ -75,6 +77,12 @@ public class PageController {
                     if(o.getStatusOrders()){
                         model.addAttribute("listSP", o.getList());
                         model.addAttribute("ListSPSize", o.getList().size());
+                        for (OrderDetails od : o.getList()){
+                            count += od.getQuantity();
+                            price += (od.getQuantity() * od.getProducts().getPrice());
+                        }
+                        model.addAttribute("count", count);
+                        model.addAttribute("price", price);
                         break;
                     }
                 }
@@ -82,6 +90,8 @@ public class PageController {
         } else {
             model.addAttribute("ListSPSize", 0);
             model.addAttribute("listSP", null);
+            model.addAttribute("count", 0);
+            model.addAttribute("price", 0);
         }
 
         pageable = PageRequest.of(0, 6);
@@ -95,6 +105,8 @@ public class PageController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         List<OrderDetails> cart = (List<OrderDetails>) session.getAttribute("cart");
+        int count = 0;
+        double price = 0;
         if(!username.equals("anonymousUser")){
             if(cart != null){
                 model.addAttribute("listSP", cart);
@@ -103,12 +115,20 @@ public class PageController {
                 for(Orders o : u.getUserInfo().getList()){
                     if(o.getStatusOrders()){
                         model.addAttribute("listSP", o.getList());
+                        for (OrderDetails od : o.getList()){
+                            count += od.getQuantity();
+                            price += (od.getQuantity() * od.getProducts().getPrice());
+                        }
+                        model.addAttribute("count", count);
+                        model.addAttribute("price", price);
                         break;
                     }
                 }
             }
         } else {
             model.addAttribute("listSP", null);
+            model.addAttribute("count", 0);
+            model.addAttribute("price", 0);
         }
 
         Page<Products> listProducts = this.productsService.findAll(pageable);
@@ -158,7 +178,8 @@ public class PageController {
 
         session.removeAttribute("cart");
         session.removeAttribute("cartRemove");
-
+        int count = 0;
+        double price = 0;
         if(!username.equals("anonymousUser")){
             if(!cartClone.isEmpty()){
                 model.addAttribute("listSP", cartClone);
@@ -167,18 +188,20 @@ public class PageController {
                 for(Orders o : u.getUserInfo().getList()){
                     if(o.getStatusOrders()){
                         model.addAttribute("listSP", o.getList());
-                        Double subtotal = 0.0;
-                        for (OrderDetails ords : o.getList()){
-                            subtotal = subtotal + (ords.getProducts().getPrice() * ords.getQuantity());
-                        };
-                        subtotal = (double) Math.round(subtotal * 100) / 100;
-                        model.addAttribute("subtotal", subtotal);
+                        for (OrderDetails od : o.getList()){
+                            count += od.getQuantity();
+                            price += (od.getQuantity() * od.getProducts().getPrice());
+                        }
+                        model.addAttribute("count", count);
+                        model.addAttribute("price", price);
                         break;
                     }
                 }
             }
         } else {
             model.addAttribute("listSP", null);
+            model.addAttribute("count", 0);
+            model.addAttribute("price", 0);
         }
 
 

@@ -139,8 +139,13 @@ public class MyRestController {
                 OrderDetails od = iterator.next();
                 if(od.getId() != null){
                     if (od.getId().equals(id)) { // Sử dụng phương thức equals() để so sánh ID
-                        iterator.remove();
-                        cartRemove.add(od);
+                        if(od.getQuantity() < 2){
+                            iterator.remove();
+                            cartRemove.add(od);
+                        } else {
+                            od.setQuantity(od.getQuantity() - 1);
+                            cartTemp.add(od);
+                        }
                     } else {
                         cartTemp.add(od);
                     }
